@@ -7,6 +7,7 @@ services:
       - "8761:8761"
     networks:
       - inside
+    command: java -Xmx128m -jar eureka-0.0.1-SNAPSHOT.jar
   zuul:
     build: b4456609/movie-zuul
     ports:
@@ -17,6 +18,7 @@ services:
       - inside
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    command: java -Xmx128m -jar zuul-0.0.1-SNAPSHOT.jar
   movie:
     build: b4456609/movie-movie
     ports:
@@ -30,12 +32,7 @@ services:
       - db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-  moviedb:
-    image: mongo:3.4.2
-    ports:
-      - 27017
-    networks:
-      - inside
+    command: java -Xmx128m -jar movie-0.0.1-SNAPSHOT.jar
   order:
     build: b4456609/movie-order
     ports:
@@ -49,6 +46,7 @@ services:
       - db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    command: java -Xmx128m -jar order-0.0.1-SNAPSHOT.jar
   theater:
     build: b4456609/movie-theater
     ports:
@@ -62,6 +60,7 @@ services:
       - theaterdb
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    command: java -Xmx128m -jar theater-0.0.1-SNAPSHOT.jar
   user:
     build: b4456609/movie-user
     ports:
@@ -75,6 +74,7 @@ services:
       - db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    command: java -Xmx128m -jar user-0.0.1-SNAPSHOT.jar
   db:
     image: mongo:3.4.2
     ports:
